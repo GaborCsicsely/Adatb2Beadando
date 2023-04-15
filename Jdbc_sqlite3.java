@@ -103,7 +103,7 @@ public class Jdbc_sqlite3 {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Adja meg a tábla nevét:");
 			String tNev = sc.nextLine();
-			System.out.println("Adja meg a változtatni kívánt rekordot:");
+			System.out.println("Adja meg a változtatni kívánt mezőt:");
 			String adatok = sc.nextLine();
 			System.out.println("Adja meg a rekord új értékét:");
 			String uj = sc.nextLine();
