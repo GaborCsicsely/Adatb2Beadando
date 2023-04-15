@@ -26,12 +26,12 @@ public class Jdbc_sqlite3 {
 
 			System.out.println("=======================================");
 			System.out.println(
-					"Válasszon menüpontot:\n 1, Tábla kiírás\n 2, Új tábla létrehozása\n 3, Adatok felvétele adott táblába.\n 4, Tábla törlése.\n 5, Tábla kiírása txt-be\n 6, Táblában elem törlése\n 7, Meta adatok kiírása\n 8, Rekord módosítása\n 9, Kilépés");
+					"VÃ¡lasszon menÃ¼pontot:\n 1, TÃ¡bla kiÃ­rÃ¡s\n 2, Ãšj tÃ¡bla lÃ©trehozÃ¡sa\n 3, Rekordok felvÃ©tele adott tÃ¡blÃ¡ba.\n 4, TÃ¡bla tÃ¶rlÃ©se.\n 5, TÃ¡bla kiÃ­rÃ¡sa txt-be\n 6, TÃ¡blÃ¡ban rekord tÃ¶rlÃ©se\n 7, Meta adatok kiÃ­rÃ¡sa\n 8, Rekord mÃ³dosÃ­tÃ¡sa\n 9, KilÃ©pÃ©s");
 			System.out.println("=======================================");
 			switch (sc.nextInt()) {
 			case 1:
 				System.out.println(
-						" 1, Egy megadott tábla kiírása.\n 2, Egy adott tábla kiírása megadott feltételek szerint.\n 3, Elõre megírt lekérdezések\n 4, Kilépés");
+						" 1, Egy megadott tÃ¡bla kiÃ­rÃ¡sa.\n 2, Egy adott tÃ¡bla kiÃ­rÃ¡sa megadott feltÃ©telek szerint.\n 3, ElÅ‘re megÃ­rt lekÃ©rdezÃ©sek\n 4, KilÃ©pÃ©s");
 				switch (sc.nextInt()) {
 				case 1:
 					prog.kiirTabla();
@@ -43,10 +43,10 @@ public class Jdbc_sqlite3 {
 					prog.eloreMegirtLekerdezesek();
 					break;
 				case 4:
-					System.out.println("Kilépés...");
+					System.out.println("KilÃ©pÃ©s...");
 					break;
 				default:
-					System.out.println("Hibás input, kilépés...");
+					System.out.println("HibÃ¡s input, kilÃ©pÃ©s...");
 					break;
 				}
 				break;
@@ -66,7 +66,7 @@ public class Jdbc_sqlite3 {
 				prog.elemTorol();
 				break;
 			case 7:
-				System.out.println("1, Összes meta adat kiírása.\n2, Adott tábla elemei.\n3, Kilépés.");
+				System.out.println("1, Ã–sszes meta adat kiÃ­rÃ¡sa.\n2, Adott tÃ¡bla.\n3, KilÃ©pÃ©s.");
 				switch (sc.nextInt()) {
 				case 1:
 					prog.metaDataKiir();
@@ -76,7 +76,7 @@ public class Jdbc_sqlite3 {
 				case 3:
 					break;
 				default:
-					System.out.println("Hibás input, kilépés...");
+					System.out.println("HibÃ¡s input, kilÃ©pÃ©s...");
 					break;
 				}
 
@@ -85,11 +85,11 @@ public class Jdbc_sqlite3 {
 				prog.rekordModosit();
 				break;
 			case 9:
-				System.out.println("Kilépés");
+				System.out.println("KilÃ©pÃ©s");
 				ok = false;
 				break;
 			default:
-				System.out.println("Hibás input");
+				System.out.println("HibÃ¡s input");
 				break;
 			}
 		} while (ok == true);
@@ -101,16 +101,16 @@ public class Jdbc_sqlite3 {
 			Connection conn = this.Connect("bead.db");
 			Statement stmt = conn.createStatement();
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Adja meg a tábla nevét:");
+			System.out.println("Adja meg a tÃ¡bla nevÃ©t:");
 			String tNev = sc.nextLine();
-			System.out.println("Adja meg a változtatni kívánt rekordot:");
+			System.out.println("Adja meg a vÃ¡ltoztatni kÃ­vÃ¡nt rekordot:");
 			String adatok = sc.nextLine();
-			System.out.println("Adja meg a rekord új értékét:");
+			System.out.println("Adja meg a rekord Ãºj Ã©rtÃ©kÃ©t:");
 			String uj = sc.nextLine();
-			System.out.println("Adja meg a feltételt:");
+			System.out.println("Adja meg a feltÃ©telt:");
 			String felt = sc.nextLine();
 			stmt.executeUpdate("UPDATE " + tNev + " SET " + adatok + " = " + uj + " WHERE " + felt);
-			System.out.println("Adatok sikeresen cserélve");
+			System.out.println("Adatok sikeresen cserÃ©lve");
 			conn.close();
 
 		} catch (Exception ee) {
@@ -122,7 +122,7 @@ public class Jdbc_sqlite3 {
 		Connection connection = this.Connect("bead.db");
 		DatabaseMetaData metaData = null;
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Adja meg táblát:");
+		System.out.println("Adja meg tÃ¡blÃ¡t:");
 		String tNev = sc.nextLine();
 		try {
 			metaData = connection.getMetaData();
@@ -154,18 +154,18 @@ public class Jdbc_sqlite3 {
 		}
 		try {
 			String databaseProductName = metaData.getDatabaseProductName();
-			System.out.println("Adatbázis program neve: " + databaseProductName);
+			System.out.println("AdatbÃ¡zis program neve: " + databaseProductName);
 
 			String databaseProductVersion = metaData.getDatabaseProductVersion();
-			System.out.println("Adatbázis program verziója: " + databaseProductVersion);
+			System.out.println("AdatbÃ¡zis program verziÃ³ja: " + databaseProductVersion);
 
 			String url = metaData.getURL();
-			System.out.println("Adatbázis URL: " + url);
+			System.out.println("AdatbÃ¡zis URL: " + url);
 
 			ResultSet tables = metaData.getTables(null, null, null, null);
 			while (tables.next()) {
 				String tableName = tables.getString("TABLE_NAME");
-				System.out.println("Tábla Neve: " + tableName);
+				System.out.println("TÃ¡bla Neve: " + tableName);
 			}
 			tables.close();
 			connection.close();
@@ -177,11 +177,11 @@ public class Jdbc_sqlite3 {
 	private void elemTorol() {
 		Scanner sc = new Scanner(System.in);
 		Connection conn = this.Connect("bead.db");
-		System.out.println("Adja meg melyik táblából szeretne elemet törölni:");
+		System.out.println("Adja meg melyik tÃ¡blÃ¡bÃ³l szeretne elemet tÃ¶rÃ¶lni:");
 		String tNev = sc.nextLine();
-		System.out.println("Adja meg a törölni kívánt táblának a PRIMARY KEY-ének nevét:");
+		System.out.println("Adja meg a tÃ¶rÃ¶lni kÃ­vÃ¡nt tÃ¡blÃ¡nak a PRIMARY KEY-Ã©nek nevÃ©t:");
 		String kulcs = sc.nextLine();
-		System.out.print("Adja meg a törölni kívánt elem kulcsát: ");
+		System.out.print("Adja meg a tÃ¶rÃ¶lni kÃ­vÃ¡nt rekord kulcsÃ¡t: ");
 		int id = sc.nextInt();
 		sc.nextLine();
 		PreparedStatement preparedStatement = null;
@@ -193,9 +193,9 @@ public class Jdbc_sqlite3 {
 			int rows = preparedStatement.executeUpdate();
 
 			if (rows > 0) {
-				System.out.println("Adat sikeresen törölve!");
+				System.out.println("Adat sikeresen tÃ¶rÃ¶lve!");
 			} else {
-				System.out.println("Nem sikerült adatot törölni.");
+				System.out.println("Nem sikerÃ¼lt adatot tÃ¶rÃ¶lni.");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -219,10 +219,10 @@ public class Jdbc_sqlite3 {
 			Connection conn = this.Connect("bead.db");
 			Statement stmt = conn.createStatement();
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Adja meg a törölni kívánt tábla nevét:");
+			System.out.println("Adja meg a tÃ¶rÃ¶lni kÃ­vÃ¡nt tÃ¡bla nevÃ©t:");
 			String tNev = sc.nextLine();
 			stmt.executeUpdate("DROP TABLE " + tNev);
-			System.out.println("Tábla sikeresen törölve.");
+			System.out.println("TÃ¡bla sikeresen tÃ¶rÃ¶lve.");
 			conn.close();
 
 		} catch (Exception ee) {
@@ -236,12 +236,12 @@ public class Jdbc_sqlite3 {
 			Connection conn = this.Connect("bead.db");
 			Statement stmt = conn.createStatement();
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Adja meg a tábla nevét:");
+			System.out.println("Adja meg a tÃ¡bla nevÃ©t:");
 			String tNev = sc.nextLine();
-			System.out.println("Adja meg a bevinni kívánt adatokat:");
+			System.out.println("Adja meg a bevinni kÃ­vÃ¡nt adatokat:");
 			String adatok = sc.nextLine();
 			stmt.executeUpdate("INSERT INTO " + tNev + " VALUES (" + adatok + ")");
-			System.out.println("Adatok sikeresen felvéve");
+			System.out.println("Adatok sikeresen felvÃ©ve");
 			conn.close();
 
 		} catch (Exception ee) {
@@ -255,17 +255,17 @@ public class Jdbc_sqlite3 {
 		Boolean ok = false;
 		Scanner sc = new Scanner(System.in);
 		do {
-			System.out.println("Adja meg a felhasználó nevét: ");
+			System.out.println("Adja meg a felhasznÃ¡lÃ³ nevÃ©t: ");
 			if (felhasznalo.equals(sc.nextLine())) {
-				System.out.println("Adja meg jelszavát: ");
+				System.out.println("Adja meg jelszavÃ¡t: ");
 				if (jelszo.equals(sc.nextLine())) {
 					ok = true;
-					System.out.println("Sikeres bejelentkezés!");
+					System.out.println("Sikeres bejelentkezÃ©s!");
 				} else {
-					System.out.println("Hibás jelszó!");
+					System.out.println("HibÃ¡s jelszÃ³!");
 				}
 			} else {
-				System.out.println("Hibás felhasználónév! ");
+				System.out.println("HibÃ¡s felhasznÃ¡lÃ³nÃ©v! ");
 			}
 		} while (ok == false);
 
@@ -274,7 +274,7 @@ public class Jdbc_sqlite3 {
 	public void Reg() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			System.out.println("Sikeres Driver regisztrálás!");
+			System.out.println("Sikeres Driver regisztrÃ¡lÃ¡s!");
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		}
@@ -285,7 +285,7 @@ public class Jdbc_sqlite3 {
 		String url = "jdbc:sqlite:C:/sql3/" + string;
 		try {
 			conn = DriverManager.getConnection(url);
-			// System.out.println("Létrejött a kapcsolat az SQLite-tal.");
+			// System.out.println("LÃ©trejÃ¶tt a kapcsolat az SQLite-tal.");
 			return conn;
 
 		} catch (SQLException e) {
@@ -304,8 +304,7 @@ public class Jdbc_sqlite3 {
 			// stmt.execute(par);
 			stmt.executeUpdate("INSERT INTO Termekek VALUES (1, 11000, 1000, 100, 200, 'Hell')");
 			stmt.executeUpdate("INSERT INTO Termekek VALUES (2, 12000, 2000, 300, 300, 'Xixo')");
-			stmt.executeUpdate("INSERT INTO Termekek VALUES (3, 13000, 3000, 500, 120, 'Egyéb')");
-			System.out.println("OK2");
+			stmt.executeUpdate("INSERT INTO Termekek VALUES (3, 13000, 3000, 500, 120, 'EgyÃ©b')");
 			conn.close();
 		} catch (Exception ee) {
 			ee.printStackTrace();
@@ -319,10 +318,9 @@ public class Jdbc_sqlite3 {
 			Statement stmt = conn.createStatement();
 			String par = "CREATE TABLE Gyarak (Gyarazonosito INT, Iranyitoszam NUMBER(4), Varos VARCHAR(30), Utca VARCHAR(30), Kiadasok NUMBER(10), Gyartasirata NUMBER(11), Vallalatiazonosito INT, PRIMARY KEY (Gyarazonosito), FOREIGN KEY (Vallalatiazonosito) REFERENCES Termekek(Vallalatiazonosito))";
 			// stmt.execute(par);
-			stmt.executeUpdate("INSERT INTO Gyarak VALUES (11, 3535, 'Miskolc', 'Gõz út', 100, 10, 1)");
-			stmt.executeUpdate("INSERT INTO Gyarak VALUES (22, 3522, 'Miskolc', 'Kandó Kálmán útca', 200, 30, 2)");
-			stmt.executeUpdate("INSERT INTO Gyarak VALUES (33, 2234, 'Budapest', 'Nagy útca', 300, 20, 3)");
-			System.out.println("OK2");
+			stmt.executeUpdate("INSERT INTO Gyarak VALUES (11, 3535, 'Miskolc', 'GÅ‘z Ãºt', 100, 10, 1)");
+			stmt.executeUpdate("INSERT INTO Gyarak VALUES (22, 3522, 'Miskolc', 'KandÃ³ KÃ¡lmÃ¡n Ãºtca', 200, 30, 2)");
+			stmt.executeUpdate("INSERT INTO Gyarak VALUES (33, 2234, 'Budapest', 'Nagy Ãºtca', 300, 20, 3)");
 			conn.close();
 		} catch (Exception ee) {
 			ee.printStackTrace();
@@ -331,7 +329,7 @@ public class Jdbc_sqlite3 {
 
 	public void TablaFileba() {
 		try {
-			System.out.println("Adja meg a txt-be kiírandó táblát:");
+			System.out.println("Adja meg a txt-be kiÃ­randÃ³ tÃ¡blÃ¡t:");
 			Scanner sc = new Scanner(System.in);
 			String tabla = sc.nextLine();
 			Connection conn = this.Connect("bead.db");
@@ -342,7 +340,7 @@ public class Jdbc_sqlite3 {
 			FileWriter fileWriter = new FileWriter("tablak.txt");
 			ResultSetMetaData rsmd = resultSet.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
-			fileWriter.write("Tábla:" + tabla + "\n");
+			fileWriter.write("TÃ¡bla:" + tabla + "\n");
 			while (resultSet.next()) {
 				for (int i = 1; i < columnsNumber; i++) {
 					String ertek = resultSet.getString(i);
@@ -366,7 +364,7 @@ public class Jdbc_sqlite3 {
 	public void kiirTabla() {
 		try {
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Adja meg a Tábla nevét.");
+			System.out.println("Adja meg a TÃ¡bla nevÃ©t.");
 			String tabla = sc.nextLine();
 			Connection conn = this.Connect("bead.db");
 			Statement stmt = conn.createStatement();
@@ -393,9 +391,9 @@ public class Jdbc_sqlite3 {
 			Connection conn = this.Connect("bead.db");
 			Statement stmt = conn.createStatement();
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Adja meg a Tábla nevét:");
+			System.out.println("Adja meg a TÃ¡bla nevÃ©t:");
 			String tabla = sc.nextLine();
-			System.out.println("Adja meg a feltételt:");
+			System.out.println("Adja meg a feltÃ©telt:");
 			String felt = sc.nextLine();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM " + tabla + " WHERE " + felt);
 			ResultSetMetaData rsmd = rs.getMetaData();
@@ -421,13 +419,13 @@ public class Jdbc_sqlite3 {
 			Connection conn = this.Connect("bead.db");
 			Statement stmt = conn.createStatement();
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Adja meg az új tábla nevét:");
+			System.out.println("Adja meg az Ãºj tÃ¡bla nevÃ©t:");
 			String tNev = sc.nextLine();
-			System.out.println("Adja meg a tábla argumentumait:");
+			System.out.println("Adja meg a tÃ¡bla argumentumait:");
 			String args = sc.nextLine();
 			String par = "CREATE TABLE " + tNev + "(" + args + ")";
 			stmt.execute(par);
-			System.out.println("Tábla sikeresen létrehozva!");
+			System.out.println("TÃ¡bla sikeresen lÃ©trehozva!");
 			conn.close();
 
 		} catch (Exception ee) {
@@ -440,7 +438,7 @@ public class Jdbc_sqlite3 {
 			Connection conn = this.Connect("bead.db");
 			Statement stmt = conn.createStatement();
 			Scanner sc = new Scanner(System.in);
-			System.out.println("1, Legnagyobb gyártású rátájú gyár\n2, Hell termékek átlagos bevétele");
+			System.out.println("1, Legnagyobb gyÃ¡rtÃ¡sÃº rÃ¡tÃ¡jÃº gyÃ¡r\n2, Hell termÃ©kek Ã¡tlagos bevÃ©tele");
 			switch (sc.nextInt()) {
 			case 1:
 				ResultSet rs = stmt.executeQuery("SELECT Gyarazonosito,MAX(Gyartasirata) FROM Gyarak");
