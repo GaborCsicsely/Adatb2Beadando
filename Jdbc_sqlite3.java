@@ -232,20 +232,31 @@ public class Jdbc_sqlite3 {
 	}
 
 	private void adatFelvesz() {
+		Connection conn = null;
+		Statement stmt = null;
 		try {
-			Connection conn = this.Connect("bead.db");
-			Statement stmt = conn.createStatement();
+			conn = this.Connect("bead.db");
+			stmt = conn.createStatement();
+			conn.setAutoCommit(false);
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Adja meg a tábla nevét:");
 			String tNev = sc.nextLine();
 			System.out.println("Adja meg a bevinni kívánt adatokat:");
 			String adatok = sc.nextLine();
 			stmt.executeUpdate("INSERT INTO " + tNev + " VALUES (" + adatok + ")");
+			conn.commit();
 			System.out.println("Adatok sikeresen felvéve");
 			conn.close();
-
+			
 		} catch (Exception ee) {
 			ee.printStackTrace();
+			if(conn!=null)
+				try {
+					conn.rollback();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		}
 	}
 
